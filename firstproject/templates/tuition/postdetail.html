@@ -1,0 +1,29 @@
+{% extends 'basic.html' %}
+{% block body %}
+{% load humanize %}
+<div class="container">
+<h1 class="text-center">Post Detail</h1>
+<div class="col-md-6">
+    <img src="{{object.image.url}}" alt="" style="width: 300px; height: 300px;" class="rounded-circle img-thumbnail">
+</div>
+<div class="col-md-8 offset-md-2">
+Title={{object.title}}<br>
+by:{{object.user.username}} at:{{object.created_at | naturaltime}}<br>
+
+{% if request.user == object.user %}
+<a href="/tuition/edit/{{object.id}}/">Edit</a><br>
+<a href="/tuition/delete/{{object.id}}/">Delete</a><br>
+{% endif %}
+
+Subject={{object.get_subject_list}}
+<br>
+class={{object.get_class_list}}<br>
+category={{object.category}}<br>
+Salary={{object.salary}}<br>
+Medium={{object.medium}}<br>
+Created_at={{object.created_at}}<br>
+Available={% if object.available %} Yes {% else %} {% endif %}<br>
+<p><b>Details</b>: {{object.details}}</p>
+</div>
+</div>
+{% endblock body %}
